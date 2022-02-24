@@ -33,8 +33,8 @@ public class Vector2 {
     }
 
     public Vector2 mult(float k) {
-        this.x = x * k;
-        this.y = y * k;
+        this.x *= k;
+        this.y += k;
         return this;
     }
 
@@ -51,7 +51,7 @@ public class Vector2 {
         return this;
     }
 
-    public static Vector2 add(Vector2 a, Vector2 b) {
+    public static Vector2 sum(Vector2 a, Vector2 b) {
         return new Vector2(a.x + b.x, a.y + b.y);
     }
 

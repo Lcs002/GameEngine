@@ -1,13 +1,13 @@
 package handlers.primitives;
 
 import handlers.GameObjectHandler;
-import handlers.UIHandler;
+import handlers.GameUIHandler;
 
 import java.awt.*;
 
 public class GameScene {
     private final GameObjectHandler GAME_OBJECT_HANDLER = new GameObjectHandler();
-    private final UIHandler UI_HANDLER = new UIHandler();
+    private final GameUIHandler UI_HANDLER = new GameUIHandler();
 
     public void tick(double deltaTime) {
         GAME_OBJECT_HANDLER.tick(deltaTime);

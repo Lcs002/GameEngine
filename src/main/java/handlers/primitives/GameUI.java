@@ -2,7 +2,7 @@ package handlers.primitives;
 
 import java.awt.*;
 
-public class UI {
+public class GameUI extends GameElement {
 
     public void tick(double deltaTime) {
 

@@ -12,13 +12,13 @@ public class CollisionHandler {
         LinkedList<GameObject> copy = (LinkedList) toCollide.clone();
         for (GameObject object : copy)
             for (GameObject other : copy) {
-                if (object != other)
-                    if (Vector2.directionTo(object.pos, other.pos).magnitude() <= object.radius + other.radius) {
-                        object.onCollide(other);
-                        other.onCollide(object);
-                        toCollide.remove(object);
-                        toCollide.remove(other);
-                    }
+                //if (object != other)
+                    //if (Vector2.directionTo(object.getPosition(), other.getPosition()).magnitude() <= object.radius + other.radius) {
+                    //    object.onCollide(other);
+                    //    other.onCollide(object);
+                    //    toCollide.remove(object);
+                    //    toCollide.remove(other);
+                    //}
             }
     }
 }
