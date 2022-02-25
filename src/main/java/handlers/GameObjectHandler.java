@@ -1,6 +1,7 @@
 package handlers;
 
 import handlers.primitives.GameObject;
+import utils.Console;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -11,8 +12,10 @@ public class GameObjectHandler {
     private final LinkedList<GameObject> QUEUE_REMOVE_GAME_OBJECTS = new LinkedList<GameObject>();
 
     public void init() {
+        Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.START);
         for (GameObject gameObject : GAME_OBJECTS)
             gameObject.init();
+        Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.END);
     }
 
     public void tick(double deltaTime) {

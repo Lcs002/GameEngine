@@ -2,6 +2,7 @@ package handlers.primitives;
 
 import handlers.GameObjectHandler;
 import handlers.GameUIHandler;
+import utils.Console;
 
 import java.awt.*;
 
@@ -23,8 +24,10 @@ public class GameScene {
     // =========================== Functionality and Overrideable
 
     public void init() {
+        Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.START);
         GAME_OBJECT_HANDLER.init();
         GAME_UI_HANDLER.init();
+        Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.END);
     }
 
     public void tick(double deltaTime) {

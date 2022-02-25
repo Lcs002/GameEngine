@@ -3,6 +3,7 @@ package core;
 import handlers.GameSceneHandler;
 import handlers.InputHandler;
 import handlers.MouseHandler;
+import utils.Console;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -24,6 +25,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public synchronized void start() {
+        Console.getInstance().showMethodState(this.getClass(), "start");
         mainThread = new Thread(this);
         mainThread.start();
         isRunning = true;
@@ -31,6 +33,7 @@ public class Game extends Canvas implements Runnable {
 
     public synchronized void stop() {
         try {
+            Console.getInstance().showMethodState(this.getClass(), "stop");
             mainThread.join();
             isRunning = false;
         } catch (Exception e) {
@@ -77,9 +80,11 @@ public class Game extends Canvas implements Runnable {
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.printf("\n\n");
-                System.out.println("TPS: " + ticks);
-                System.out.println("FPS: " + frames);
+                if (GameSceneHandler.getInstance().isInDebug()) {
+                    System.out.printf("\n\n");
+                    System.out.println("TPS: " + ticks);
+                    System.out.println("FPS: " + frames);
+                }
                 debug();
                 frames = 0;
                 ticks = 0;

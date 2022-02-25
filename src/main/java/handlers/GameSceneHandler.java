@@ -2,6 +2,7 @@ package handlers;
 
 import core.Game;
 import handlers.primitives.GameScene;
+import utils.Console;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ public class GameSceneHandler {
     private final LinkedList<GameScene> GAME_SCENES = new LinkedList<GameScene>();
     private GameScene currentScene = null;
     public GameScene startingScene = null;
-    private boolean inDebug = true;
+    private boolean inDebug = false;
 
     public static GameSceneHandler getInstance() {
         if (gameSceneHandler == null)
@@ -21,7 +22,14 @@ public class GameSceneHandler {
 
     public void init() {
         currentScene = startingScene;
-        currentScene.init();
+        if (currentScene != null) {
+            Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.START);
+            currentScene.init();
+            Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.END);
+        } else {
+            Console.getInstance().showMethodState(this.getClass(), "init", Console.METHOD_STATE.ERROR, "'startingScene' not initialized");
+        }
+
     }
 
     public void tick(double deltaTime) {

@@ -1,5 +1,6 @@
 package handlers.primitives;
 
+import utils.Console;
 import utils.Vector2;
 
 import java.awt.*;
