@@ -1,6 +1,6 @@
 package utils;
 
-public class Globals {
+public class Exceptions {
 
     public static double zeroException(double value) {
         return value == 0 ? -1 : value;

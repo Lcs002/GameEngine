@@ -5,7 +5,14 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
 public class InputHandler implements KeyListener {
+    private static InputHandler inputHandler = null;
     private LinkedList<Integer> keyPressed = new LinkedList<Integer>();
+
+    public static InputHandler getInstance() {
+        if (inputHandler == null)
+            inputHandler = new InputHandler();
+        return inputHandler;
+    }
 
     // Not sure how keyTyped works
     @Override

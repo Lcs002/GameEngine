@@ -6,32 +6,40 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class GameObjectHandler {
-    private final LinkedList<GameObject> GameOBJECTS = new LinkedList<GameObject>();
-    private final LinkedList<GameObject> QUEUE_ADD_Game_OBJECTS = new LinkedList<GameObject>();
-    private final LinkedList<GameObject> QUEUE_REMOVE_Game_OBJECTS = new LinkedList<GameObject>();
+    private final LinkedList<GameObject> GAME_OBJECTS = new LinkedList<GameObject>();
+    private final LinkedList<GameObject> QUEUE_ADD_GAME_OBJECTS = new LinkedList<GameObject>();
+    private final LinkedList<GameObject> QUEUE_REMOVE_GAME_OBJECTS = new LinkedList<GameObject>();
+
+    public void init() {
+        for (GameObject gameObject : GAME_OBJECTS)
+            gameObject.init();
+    }
 
     public void tick(double deltaTime) {
-
+        for (GameObject gameObject : GAME_OBJECTS)
+            gameObject.tick(deltaTime);
     }
 
     public void render(Graphics g) {
-
+        for (GameObject gameObject : GAME_OBJECTS)
+            gameObject.render(g);
     }
 
     public void debug() {
-
+        for (GameObject gameObject : GAME_OBJECTS)
+            gameObject.debug();
     }
 
-    public void queueAdd(GameObject gameObject) {
-        QUEUE_ADD_Game_OBJECTS.add(gameObject);
+    public boolean queueAdd(GameObject gameObject) {
+        return QUEUE_ADD_GAME_OBJECTS.add(gameObject);
+    }
+
+    public boolean queueRemove(GameObject gameObject) {
+        return QUEUE_REMOVE_GAME_OBJECTS.remove(gameObject);
     }
 
     private void queuedAdd() {
 
-    }
-
-    public void queueRemove(GameObject gameObject) {
-        QUEUE_REMOVE_Game_OBJECTS.remove(gameObject);
     }
 
     private void queuedRemove() {

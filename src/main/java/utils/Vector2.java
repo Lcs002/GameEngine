@@ -39,7 +39,7 @@ public class Vector2 {
     }
 
     public Vector2 normalize() {
-        float mod = (float) Globals.zeroException(this.magnitude());
+        float mod = (float) Exceptions.zeroException(this.magnitude());
         this.x/=mod;
         this.y/=mod;
         return this;
@@ -60,7 +60,7 @@ public class Vector2 {
     }
 
     public static Vector2 normalize(Vector2 a) {
-        float mod = (float) Globals.zeroException(a.magnitude());
+        float mod = (float) Exceptions.zeroException(a.magnitude());
         return new Vector2(a.x/mod, a.y/mod);
     }
 }

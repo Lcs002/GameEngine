@@ -10,6 +10,7 @@ public class GameElement {
     // ================================== Variables
 
     private LinkedList<ID> ids = new LinkedList<ID>();
+    private LinkedList<Component> components = new LinkedList<Component>();
     private LinkedList<GameElement> children = new LinkedList<GameElement>();
     private GameElement parent = null;
     private Vector2 position = new Vector2(0, 0);
@@ -26,6 +27,14 @@ public class GameElement {
 
     public LinkedList<ID> getIds() {
         return this.ids;
+    }
+
+    public boolean addComponent(Component component) {
+        return this.components.add(component);
+    }
+
+    public boolean removeComponent(Component component) {
+        return this.components.remove(component);
     }
 
     public boolean addChild(GameElement element) {
@@ -66,18 +75,34 @@ public class GameElement {
         else return this.position;
     }
 
-    // ================================== Overrideables
+    // ================================== Overrideable
+
+    public void init() {
+        for (Component component : components)
+            component.init();
+        for (GameElement child : children)
+            child.init();
+    }
 
     public void tick(double deltaTime) {
-
+        for (Component component : components)
+            component.tick(deltaTime);
+        for (GameElement child : children)
+            child.tick(deltaTime);
     }
 
     public void render(Graphics g) {
-
+        for (Component component : components)
+            component.render(g);
+        for (GameElement child : children)
+            child.render(g);
     }
 
     public void debug() {
-
+        for (Component component : components)
+            component.debug();
+        for (GameElement child : children)
+            child.debug();
     }
 
     // ================================== Others
@@ -87,6 +112,19 @@ public class GameElement {
             if (i == id)
                 return true;
         return false;
+    }
+
+    public <T extends Component> T getComponent(Class<T> component) {
+        for (Component c : components) {
+            if (component.isAssignableFrom(c.getClass())) {
+                try { return component.cast(c); }
+                catch (ClassCastException exception) {
+                    exception.printStackTrace();
+                    assert false : "Error :: Could not cast Component ( " + Component.class + " )";
+                }
+            }
+        }
+        return null;
     }
 
     // ================================== ID ENUM

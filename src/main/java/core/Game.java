@@ -3,7 +3,6 @@ package core;
 import handlers.GameSceneHandler;
 import handlers.InputHandler;
 import handlers.MouseHandler;
-import handlers.primitives.GameScene;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -11,9 +10,6 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 900;
-    public static final InputHandler INPUT_HANDLER = new InputHandler();
-    public static final MouseHandler MOUSE_HANDLER = new MouseHandler();
-    public static final GameSceneHandler GAME_SCENE_HANDLER = new GameSceneHandler();
     public static Display display;
 
     private Thread mainThread;
@@ -21,10 +17,10 @@ public class Game extends Canvas implements Runnable {
 
     public Game() {
         this.display = new Display(WIDTH, HEIGHT, "TEST", this);
-        this.addKeyListener(INPUT_HANDLER);
-        this.addMouseListener(MOUSE_HANDLER);
+        this.addKeyListener(InputHandler.getInstance());
+        this.addMouseListener(MouseHandler.getInstance());
         // Set Main Scene Here
-        this.GAME_SCENE_HANDLER.init();
+        GameSceneHandler.getInstance().init();
     }
 
     public synchronized void start() {
@@ -93,7 +89,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick(double ticksDelta) {
-        GAME_SCENE_HANDLER.tick(ticksDelta);
+        GameSceneHandler.getInstance().tick(ticksDelta);
     }
 
     private void render() {
@@ -103,12 +99,12 @@ public class Game extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        GAME_SCENE_HANDLER.render(g);
+        GameSceneHandler.getInstance().render(g);
         g.dispose();
         bs.show();
     }
 
     private void debug() {
-        GAME_SCENE_HANDLER.debug();
+        GameSceneHandler.getInstance().debug();
     }
 }
